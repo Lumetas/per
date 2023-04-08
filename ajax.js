@@ -14,3 +14,12 @@ function lumAjax(e) {
  	o.open("GET", e.url);
 	o.send();
 }
+/*
+   lumAjax({
+    url:'server.php',
+    success: function(data){
+	alert(data);
+    }
+
+	});
+*/
