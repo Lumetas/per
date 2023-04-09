@@ -1,5 +1,5 @@
 function initXMLhttp() {
-    var init;
+    let init;
     return (init = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP"));
 }
 function lumAjax(init) {
