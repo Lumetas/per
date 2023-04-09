@@ -1,19 +1,18 @@
 function initXMLhttp() {
-    var e;
-    return (e = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP"));
+    var init;
+    return (init = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP"));
 }
-function lumAjax(e) {
-	e.type = 'GET';
-    if (!e.url) return void (1 == e.debugLog && console.log("No Url!"));
-    let o = initXMLhttp();
-    o.onreadystatechange = function () {
+function lumAjax(init) {
+	init.type = 'GET';
+    let ajax = initXMLhttp();
+    ajax.onreadystatechange = function () {
 		try{
-            e.success(o.responseText);
+            init.success(ajax.responseText);
 		}
 		catch(err){}
 		};
- 	o.open("GET", e.url);
-	o.send();
+ 	ajax.open("GET", init.url);
+	ajax.send();
 }
 /*
    lumAjax({
