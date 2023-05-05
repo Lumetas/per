@@ -9,7 +9,7 @@ def write_msg(user_id, message):
     vk.method('messages.send', {'user_id': user_id, 'message': message, 'random_id': randint(0, 1000)})
 
 # API-ключ созданный ранее
-token = "vk1.a.szTPfS0Uq5smZne45nu0VdZxqLMTbEABzahwvF0ACkHc5UBXEgF1goGJzYgP2mIME0dsspAYSieasMfPmdCtVbvEx0SNKdC9D37Ant4hAaAZxmxJTA6bcuro3UkSE5b4tWmHikIozJ3KCHnqC6kdjZ7rfr9zMCNu3x1bzg7jwVIle-clCWp1sVjk0v0UCy53squbWVOFh0AKFapWyFtjmQ"
+token = ""
 
 # Авторизуемся как сообщество
 vk = vk_api.VkApi(token=token)
