@@ -1,0 +1,10 @@
+#!/bin/bash
+if [[ "$1" == "-u" ]]; then
+  args=${@:3}
+  su $2 -c "$args"
+elif [[ "$1" == "-b" ]]; then
+  args=${@:2}
+  su -c "$args > ~/lump.back &"
+else
+  su -c "$*"
+fi
