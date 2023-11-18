@@ -1,0 +1,65 @@
+#!/bin/php
+<?php
+function add($name){
+	$n = readline('Имя: ');
+	$obj['name'] = $n;
+	$time = (float)shell_exec("ffprobe -v error -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 $name");
+	$obj['time'] = $time;
+	shell_exec("ffmpeg -i $name ".$n."-img%d.jpg");
+	mkdir($n);
+	shell_exec("mv ".$n."-img* $n"); 
+	$obj['countframes'] = getcountframes($n);
+	$obj['fps'] = $obj['countframes'] / $obj['time'];
+	$obj['fps'] = (int)$obj['fps'];
+	var_dump($obj);
+	file_put_contents(posix_getcwd(). "/$n/main.json", json_encode($obj));
+
+}
+function getcountframes($name){
+$dir = opendir($name);
+$count = 0;
+while($file = readdir($dir)){
+    if($file == '.' || $file == '..' || is_dir('path/to/dir' . $file)){
+        continue;
+    }
+    $count++;
+}
+return $count;
+}
+
+function run($path){
+	$obj = json_decode(file_get_contents("$path/main.json"));
+	while (true):
+		$i = 1;
+		while($i <= $obj->countframes ):
+			shell_exec("feh --bg-scale $path/". $obj->name. "-img$i.jpg");
+			$i += 1;
+
+		endwhile;
+
+
+	endwhile;
+
+
+}
+
+if (!isset($argv[1])){
+	exit();
+}
+if ($argv[1] == "add"){
+	if (isset($argv[2])){
+		add($argv[2]);
+	}
+	else{
+		add(readline());
+	}
+}
+if ($argv[1] == "run"){
+	if (isset($argv[2])){
+		run($argv[2]);
+	}
+	else{
+		run(readline());
+	}
+}
+
